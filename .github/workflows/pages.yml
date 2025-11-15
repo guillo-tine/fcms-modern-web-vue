@@ -28,6 +28,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Create SPA 404 fallback
+        run: |
+          if [ -d dist ]; then
+            cp dist/index.html dist/404.html
+          fi
+
       - name: Deploy to GitHub Pages (push to gh-pages branch)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
