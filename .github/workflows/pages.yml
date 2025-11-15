@@ -28,21 +28,10 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Prerender static HTML with react-snap
+      - name: Skip prerender (disabled in CI)
         run: |
-          # Start a static server in the background to serve the built files
-          npx serve dist -l 5000 >/dev/null 2>&1 &
-          # Wait a second for the server to be available
-          sleep 1
-          # react-snap expects the static site to be in a `build` folder (CRA convention).
-          # Vite outputs to `dist`, so copy `dist` -> `build` so react-snap can find and
-          # write files there without changing react-snap defaults.
-          rm -rf build || true
-          cp -r dist build
-          # Run react-snap with Puppeteer flags to disable the Chrome sandbox which
-          # is not available in the Actions runner environment. This avoids the
-          # 'No usable sandbox' fatal error.
-          npx react-snap --puppeteer-args='--no-sandbox --disable-setuid-sandbox'
+          echo "Skipping react-snap prerender in CI because Chromium sandboxing is not available on the runner."
+          echo "We rely on client-side rendering + the SPA 404 fallback for GitHub Pages."
 
       - name: Create SPA 404 fallback
         run: |
