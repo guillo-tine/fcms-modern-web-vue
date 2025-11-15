@@ -39,7 +39,10 @@ jobs:
           # write files there without changing react-snap defaults.
           rm -rf build || true
           cp -r dist build
-          npx react-snap
+          # Run react-snap with Puppeteer flags to disable the Chrome sandbox which
+          # is not available in the Actions runner environment. This avoids the
+          # 'No usable sandbox' fatal error.
+          npx react-snap --puppeteer-args='--no-sandbox --disable-setuid-sandbox'
 
       - name: Create SPA 404 fallback
         run: |
