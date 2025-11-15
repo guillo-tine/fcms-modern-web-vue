@@ -43,7 +43,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
       <div 
         className="absolute inset-0 bg-cover bg-center transition-transform duration-100 ease-out" 
         style={{ 
-          backgroundImage: "url('/uploads/0f4fb270-fce1-43e3-a0e5-cc194026c298.png')",
+          backgroundImage: `url('${import.meta.env.BASE_URL}uploads/0f4fb270-fce1-43e3-a0e5-cc194026c298.png')`,
           transform: `scale(${scale}) translateY(${translateY}px)`,
           opacity: opacity
         }}
