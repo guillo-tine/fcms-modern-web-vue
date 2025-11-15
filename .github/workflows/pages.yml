@@ -28,6 +28,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Prerender static HTML with react-snap
+        run: |
+          # Start a static server in the background and prerender the SPA
+          npx serve dist -l 5000 >/dev/null 2>&1 &
+          # Wait a second for the server to be available
+          sleep 1
+          npx react-snap
+
       - name: Create SPA 404 fallback
         run: |
           if [ -d dist ]; then
