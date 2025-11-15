@@ -49,6 +49,9 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="%BASE_URL%src/main.tsx"></script>
+    <!-- Vite expects module entry to use a root-relative /src path so it can be
+      resolved and rewritten correctly at build-time when `base` is set. Do
+      NOT prepend %BASE_URL% here. -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
